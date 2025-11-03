@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Force light mode: ensure the color variables remain the light theme
+   even when the OS prefers dark or Tailwind applies a `.dark` class. */
+@media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+}
+
+/* In case your Tailwind config uses the `class` strategy (adds `html.dark`),
+   override that too so utilities relying on these variables stay light. */
+html.dark, .dark {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Also make sure common dark utility targets don't force a dark background
+   by adding higher-specificity rules where necessary. */
+.dark\:bg-black, .dark\:bg-\[\#0b0b0b\] {
+  background: var(--background) !important;
+}
+

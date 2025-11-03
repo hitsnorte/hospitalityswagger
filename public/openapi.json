@@ -1,0 +1,77 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Healthcheck API",
+    "version": "1.0.0",
+    "description": "OpenAPI spec for the target API. Use the Authorize button to provide the Authorization header."
+  },
+  "servers": [
+    {
+      "url": "http://192.168.144.63:5001"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "simpleAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "A simple header named `Authorization`. Enter the raw value (no \"Bearer \" prefix) unless your backend requires it."
+      }
+    }
+  },
+  "paths": {
+    "/hospitalitysearchtest": {
+      "get": {
+        "summary": "Hospitality search test",
+        "description": "Search hospitality demo with pagination and date range.",
+        "parameters": [
+          {
+            "name": "Rows",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32" },
+            "description": "Number of rows to return"
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32" },
+            "description": "Page number"
+          },
+          {
+            "name": "InitDate",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date" },
+            "description": "Start date (YYYY-MM-DD)"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "format": "date" },
+            "description": "End date (YYYY-MM-DD)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          },
+          "401": { "description": "Unauthorized - missing or invalid Authorization header" },
+          "404": { "description": "Not found" },
+          "500": { "description": "Server error" }
+        },
+        "security": [
+          { "simpleAuth": [] }
+        ]
+      }
+    }
+  }
+}
