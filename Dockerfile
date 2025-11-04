@@ -11,9 +11,6 @@ RUN npm install
 # Copy entire project (including server.js and prisma folder)
 COPY . .
 
-# Generate Prisma client
-RUN npx prisma generate
-
 # Build your Next.js application
 RUN npm run build
 
